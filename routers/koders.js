@@ -5,20 +5,24 @@ const Koder = require('../models/koderModel');
 router.get('/', async (req, res) => {
     const koderGender = req.query.gender;
 
-    let allKoders = await Koder.find({})
-    let filteredKoder = koderGender ? await Koder.find({ gender: koderGender}): null;
-
-    if(filteredKoder) {
-        allKoders = filteredKoder;
+    if(koderGender) {
+        res.json({
+            error: null,
+            message: 'all koders',
+            data: {
+                koders: await Koder.find({ gender: koderGender})
+            }
+        })
+    } else {
+        res.json({
+            error: null,
+            message: 'all koders',
+            data: {
+                koders: await Koder.find({})
+            }
+        })
     }
-
-    res.json({
-        error: null,
-        message: 'all koders',
-        data: {
-            koders: allKoders
-        }
-    })
+   
 })
 
 router.post('/',  async (req, res) =>{
