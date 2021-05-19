@@ -6,7 +6,7 @@ router.get('/', async (req, res) => {
     const koderGender = req.query.gender;
 
     let allKoders = await Koder.find({})
-    let filteredKoder = koderGender ? allKoders.filter(koder=> koder.gender == koderGender): null;
+    let filteredKoder = koderGender ? await Koder.find({ gender: koderGender}): null;
 
     if(filteredKoder) {
         allKoders = filteredKoder;
